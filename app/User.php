@@ -16,7 +16,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        "name",
+        "email",
+        "username",
+        "password",
+        "role",
     ];
 
     /**
@@ -27,4 +31,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function data()
+    {
+        return $this->hasMany(UserMetadatum::class, 'user_id', 'id');
+    }
+
+    public function book()
+    {
+        return $this->hasMany(RoomBook::class, 'user_id', 'id');
+    }
 }
